@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>First Example</title>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" placeholder="Your name" v-model="name">
+        <p>This is your name in UpperCase: {{ name | uppercase }}</p>
+
+        <form @submit.prevent="methodSubmit" action="" method="get">
+            <h2>Witch are your favorite courses ?</h2>
+            <input v-model="courses" type="checkbox" id="vue" value="vue">
+            <label for="vue">Course Vue.js</label>
+            <input v-model="courses" type="checkbox" id="seo" value="seo">
+            <label for="seo">Course Seo</label>
+            <input v-model="courses" type="checkbox" id="react" value="react">
+            <label for="react">Course React</label>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script type="text/javascript">
+        let app = new Vue({
+            el: '#app',
+            data: {
+                name: '',
+                courses: []
+            },
+            filters: {
+                uppercase: function (str) {
+                    return str.toUpperCase();
+                }
+            },
+            methods: {
+                methodSubmit: function () {
+                    console.log("methodSubmit is executed");
+                    console.log(this.courses);
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
