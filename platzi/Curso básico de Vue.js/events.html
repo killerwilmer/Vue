@@ -28,7 +28,13 @@
                 },
                 subtract: function () {
                     this.counter--;
-                }
+                }//, // si usamos arrow functions, this hace referencia al objeto window y no a Vue por lo tanto no encuentra a counter
+                // sumar: () => {
+                //     this.counter++
+                // },
+                // restar: () => {
+                //     this.counter--
+                // }
             },
         });
     </script>
