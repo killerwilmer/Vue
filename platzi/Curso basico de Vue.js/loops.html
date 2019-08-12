@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>First Example</title>
+</head>
+
+<body>
+    <div id="app">
+        <form @submit.prevent="methodSubmit" action="" method="get">
+            <h2>Witch are your favorite courses ?</h2>
+            <template v-for="course in courses">
+                <input v-model="selectedCourses" type="checkbox" v-bind:id="course.value" v-bind:value="course.value">
+                <label v-bind:for="course.value">{{ course.name }}</label>
+            </template>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script type="text/javascript">
+        let app = new Vue({
+            el: '#app',
+            data: {
+                courses: [
+                    {
+                        name: 'Course Vue.js',
+                        value: 'vue'
+                    },
+                    {
+                        name: 'Course Seo',
+                        value: 'seo'
+                    },
+                    {
+                        name: 'Course React',
+                        value: 'react'
+                    }
+                ],
+                selectedCourses: []
+            },
+            methods: {
+                methodSubmit: function () {
+                    console.log('Se ejecuta el metodo seleccionado');
+                    console.log(this.selectedCourses);
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
