@@ -12,8 +12,8 @@
     <div id="app">
         <form @submit.prevent="methodSubmit" action="" method="get">
             <h2>Witch are your favorite courses ?</h2>
-            <template v-for="course in courses">
-                <course :course="course" @checked="selectCourse"></course>
+            <template v-for="myCourse in courses">
+                <course-component :props_course="myCourse" @emit_checked="selectCourse"></course-component>
             </template>
             <button type="submit">Submit</button>
         </form>
@@ -22,17 +22,17 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script type="text/javascript">
 
-        Vue.component('course', {
-            props: ['course'],
+        Vue.component('course-component', {
+            props: ['props_course'],
             methods: {
                 onchange: function (ev) {
-                    this.$emit('checked', this.course.value, ev.target.checked)
+                    this.$emit('emit_checked', this.props_course.value, ev.target.checked)
                 }
             },
             template: `
             <div>
-                <input type="checkbox" v-bind:id="course.value" v-bind:value="course.value" @change="onchange">
-                <label v-bind:for="course.value">{{ course.name }}</label>
+                <input type="checkbox" v-bind:id="props_course.value" v-bind:value="props_course.value" @change="onchange">
+                <label v-bind:for="props_course.value">{{ props_course.name }}</label>
             </div>
             `
         })
