@@ -1,7 +1,9 @@
 <template lang="pug">
 #app
   img(src='./assets/logo.png')
-  h1 Music
+  h1 Music App
+  select(v-model="selectedCountry")
+    option(v-for="country in countries" v-bind:value="country.value") {{ country.name }}
   ul
     band(v-for="artist in artists" v-bind:artist="artist" v-bind:key="artist.mbid")
 </template>
@@ -13,18 +15,34 @@ export default {
   name: 'app',
   data () {
     return {
-      artists: []
+      artists: [],
+      countries: [
+        { name: 'Argentina', value: 'argentina' },
+        { name: 'Colombia', value: 'colombia' },
+        { name: 'España', value: 'spain' }
+      ],
+      selectedCountry: 'colombia'
     }
   },
   components: {
     Band: Band
   },
-  mounted: function ()  {
-    const self = this
-    getArtists()
-      .then(function (artists) {
-        self.artists = artists
-      })
+  methods: {
+    refreshArtists() {
+      const self = this
+      getArtists(this.selectedCountry)
+        .then(function (artists) {
+          self.artists = artists
+        })
+    }
+  },
+  mounted()  {
+    this.refreshArtists()
+  },
+  watch: {
+    selectedCountry() {
+      this.refreshArtists()
+    }
   }
 }
 </script>
