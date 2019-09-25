@@ -3,10 +3,11 @@
   img(src='./assets/logo.png')
   h1 Music
   ul
-    li(v-for="artist in artists") {{artist.name }}
+    band(v-for="artist in artists" v-bind:artist="artist" v-bind:key="artist.mbid")
 </template>
 
 <script>
+import Band from './components/Band.vue'
 import getArtists from './api'
 export default {
   name: 'app',
@@ -14,6 +15,9 @@ export default {
     return {
       artists: []
     }
+  },
+  components: {
+    Band: Band
   },
   mounted: function ()  {
     const self = this
